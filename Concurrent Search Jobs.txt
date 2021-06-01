@@ -1,0 +1,3 @@
+|  rest /servicesNS/-/-/saved/searches 
+|  dedup title 
+|  table title,cron_schedule,eai:acl.app,eai:acl.owner
