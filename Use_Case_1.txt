@@ -10,3 +10,23 @@ GET       200
 GET       201
 POST      400
 POST      3001
+
+Ans : --
+1) 
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status 
+| search status<300 OR status>399
+
+2) 
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status 
+| search NOT(status>=300 AND status<=399)
+
+3) 
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status 
+| search NOT (status >= 300 AND status<400)
+
