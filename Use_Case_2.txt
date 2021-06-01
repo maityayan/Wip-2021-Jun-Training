@@ -10,8 +10,20 @@ Q -- Bring up the 4th,5th,6th and 7th rows .
 O/p --
 
 file 
-readme.txt
-LogService
-index.php
+Autodiscover.xml
 eval-stdin.php
+index.php
+readme.txt
 
+Ans : -- 
+1) 
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file | head 7 | tail 4 | reverse
+
+2) 
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file | head 7 | tail 4 | tail 4
+
+3)
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file | head 7 | reverse | head 4 | reverse
