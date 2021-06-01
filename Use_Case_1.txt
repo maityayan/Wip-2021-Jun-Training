@@ -1,0 +1,12 @@
+index=_internal sourcetype=splunkd_ui_access | table method,status | dedup method,status |
+
+------ Run the above query from 24th May to 31st May 
+
+300 - 399 ------------ discard status values ---
+
+O/p --
+method   status 
+GET       200
+GET       201
+POST      400
+POST      3001
