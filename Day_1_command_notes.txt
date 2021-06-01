@@ -1,0 +1,100 @@
+
+a name  4
+
+Akshay
+arvind
+ayan
+sulman
+
+
+
+# Age 3 
+34
+45
+56
+
+
+ls | grep a.txt | cat a.txt 
+
+| search <string>
+
+fails
+
+failed
+
+failure
+
+| search fail*
+
+
+NOT,OR,AND
+
+| table <field_names>
+
+
+index=_internal sourcetype=splunkd_ui_access  
+| table method,status 
+| dedup method,status | sort - status
+
+
+
+index=_internal sourcetype=splunkd_ui_access  
+| table method,status 
+| dedup method,status | sort method
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| fields method,status,bytes,date_*
+| table method,status,bytes,date_* 
+| dedup method,status,bytes | search status <300 OR status >399 | fields - status | table date_zone,*
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| fields method,status,bytes,date_*
+| table method,status,bytes,date_* 
+| dedup method,status,bytes | search status <300 OR status >399 | fields - status | table date_month,*
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| fields method,status,bytes,date_*
+| table method,status,bytes,date_* 
+| dedup method,status,bytes | search status <300 OR status >399 | fields - status | table bytes,date_hour,date_mday,date_month,*
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file | head 5
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file | tail 5
+
+
+
+
+| rename <old_field_name1> as <new_field_name1> , <old_field_name2> as <new_field_name2> 
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status 
+| rename method as "Http Method",status as "Http Status"
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,date_* | rename date_* as *
+
+
+
+| replace <old_field_value> with <new_field_value> in <field_name> 
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status 
+| replace "GET" with "Read", "POST" with "Upload" in method
+
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status 
+| dedup method,status | replace "*T" with "Successful" in method
+
