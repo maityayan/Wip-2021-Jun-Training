@@ -1,3 +1,6 @@
 |  rest /servicesNS/-/-/saved/searches 
 |  dedup title 
-|  table title,cron_schedule,eai:acl.app,eai:acl.owner
+|  table title,cron_schedule,eai:acl.app,eai:acl.owner,disabled 
+|  search disabled="0" 
+|  where isnotnull(cron_schedule) 
+|  stats list(*) as * by cron_schedule
