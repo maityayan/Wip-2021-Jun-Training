@@ -1,0 +1,173 @@
+>>>>>> Splunk Architecture <<<<<
+1) Universal Forwarder ( UF ) --- Splunk Universal Forwarder Package 
+CLI ---
+
+Splunk Enterprise Package --- CLI + GUI 
+2) Heavy Forwarder ( HF )
+a) Parsing 
+
+This is Ayan
+This is Raja
+This is Naveen 
+
+
+This is Ayan
+
+This is Raja
+
+This is Naveen 
+
+
+-----------
+
+This is ayan|he lives in kolkata|
+This is raja|he lives in mumbai|
+This is Naveen|he lives in chennai| 
+
+
+
+This is ayan
+
+he lives in kolkata
+ 
+This is raja
+
+he lives in mumbai
+
+This is Naveen
+
+he lives in chennai
+
+
+-------------
+This is Ayan and his account number is 12232434
+This is Raja and his account number is 093509705
+This is Naveen and his account number is 98678699879
+
+
+This is Ayan and his account number is xxxx2434
+
+This is Raja and his account number is xxxx9705
+
+This is Naveen and his account number is xxxx9879
+
+
+
+b) Filtering 
+
+This is Ayan and he logged in from 198.45.67.10
+This is Raja and he logged off from 192.168.56.136
+This is Naveen and he logged in from 192.34.56.10
+
+
+
+This is Ayan and he logged in from 198.45.67.10
+
+This is Naveen and he logged in from 192.34.56.10
+
+
+
+---------------------
+
+
+This is Ayan and he logged in from 198.45.67.10
+This is Raja and he logged off from 192.168.56.136
+This is Naveen and he logged in from 192.34.56.10
+
+logged_in
+
+This is Ayan and he logged in from 198.45.67.10
+
+This is Naveen and he logged in from 192.34.56.10
+
+
+
+logged_off 
+This is Raja and he logged off from 192.168.56.136
+
+
+
+3) Indexer ( IDX )
+
+os 
+
+windows 
+
+cisco 
+
+palo-alto
+
+apple-os 
+
+apple-windows 
+
+bmw-os 
+
+bmw-windows 
+
+
+chrome ---
+
+-------- Metadata ----- 
+ -------------------- host --- IP Address , DNS , Hostname of the application server ( 192.34.56.90 , ldap-001 , apple.ldap-001.com )
+ -------------------- source ----- Actual path of the data ( /var/log/secure , C:\Program Files\Chrome\history.txt )
+  -------------------- sourcetype ---- C:\Program Files\Chrome\history.txt ---- txtlog | chrometxt
+                                       C:\Program Files\Chrome\record.txt 
+									   C:\Program Files\Chrome\download.txt 
+									   
+									   C:\Program Files\Chrome\history.xml --- xmllog | chromexml 
+                                       C:\Program Files\Chrome\browse.xml  
+									   
+index=chrome sourcetype=chromexml								   
+									 
+
+
+palo-alto --------- pan:traffic
+          --------- pan:user
+          --------  pan:threat 		  
+
+
+4) Search Head ( SH )
+
+
+5) Deployment Server ( DS )
+
+6) License Master ( LM )
+
+----- License Stacking ---- 5 GB + 20 GB == 25 GB 
+
+
+5 --- expiry data -- 2022 -- 23rd May 
+20 ------------------ 2023 -- 23rd May 
+
+----- License Pooling 
+Pool-A -- 23 GB --- IDX -- > 23 GB 
+Pool-B -- 2 GB --- SH,DS --
+
+-------------
+Pool-master -- 25GB -- 
+
+ 5 time violation in a rolling period of 30 days 
+
+---- 3rd Jan ---- 1 
+--- 4th ---------- 2 
+---- 5th -----    3 
+---- 11th ------ 4 
+---- 15th ----- 5 
+----- 20th -----
+
+----- 2nd Feb ---
+>5 time violation ---
+
+< 6.5 ---- Enforcement License ---- Indexing continues ---- searching blocked 
+>= 6.5 --- No-Enforcement License ---- Indexing continues ---- searching continues --- Splunk can take legal action against your organization 
+
+https://splunkonbigdata.com/2020/07/31/splunk-licensing-enforcement-vs-no-enforcement/ --
+
+---------------------------------------- License Master Goes Down -------------------------------------------------
+ > 72 hours ----- Indexing continues ---- searching blocked 
+ 
+---------------------------------------- License Expires -------------------------
+Indexing continues ---- searching blocked 
+
+https://splunkonbigdata.com/2018/09/25/what-happens-when-license-master-goes-down/
