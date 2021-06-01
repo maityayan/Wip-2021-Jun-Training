@@ -1,0 +1,17 @@
+index=_internal sourcetype=splunkd_ui_access 
+| table file | dedup file
+
+-------
+Run the above query from 23rd May - 28th May ----
+----
+
+Q -- Bring up the 4th,5th,6th and 7th rows .
+
+O/p --
+
+file 
+readme.txt
+LogService
+index.php
+eval-stdin.php
+
