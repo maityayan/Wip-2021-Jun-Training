@@ -1,0 +1,4 @@
+index=_internal sourcetype=splunkd_ui_access 
+
+
+----- List down all of the "method" values for which there are more than 5 "file" s are coming. Also list down the unique "file" values.
