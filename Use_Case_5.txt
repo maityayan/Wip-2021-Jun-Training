@@ -1,0 +1,8 @@
+index=main  sourcetype="sophos:computerdata" 
+| stats values(LastScanDateTime) as LastScanDateTime by ComputerName 
+|  append 
+    [ |  search index=main  sourcetype="sophos:firewall" 
+|  stats values(UserName) as UserName by ComputerName ]
+
+----------------
+--- Findout the lastscandate and usernames for each computer 
