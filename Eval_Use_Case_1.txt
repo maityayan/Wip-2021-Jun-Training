@@ -1,0 +1,8 @@
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status
+
+--------------------- Get the percentage of status and count field 
+
+o/p ---
+method status count status_pct count_pct 
+A        2     3       40 %      60 %
