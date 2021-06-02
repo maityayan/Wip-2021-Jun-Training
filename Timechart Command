@@ -1,0 +1,16 @@
+index=_internal sourcetype=splunkd_ui_access 
+|  timechart span=4h count
+
+span ---
+
+s - sec 
+m - min
+h - hour 
+d - day 
+w - week
+mon - month 
+y - year 
+
+index=_internal sourcetype=splunkd_ui_access 
+| timechart count,avg(status) as average,sum(status) as summ, min(status) as minimum,max(status) as maximum,dc(status) as distinct,values(status) as val by method 
+|  fillnull value="N/A"
