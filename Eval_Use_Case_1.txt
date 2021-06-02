@@ -1,7 +1,7 @@
 index=_internal sourcetype=splunkd_ui_access 
 |  stats count by method,status
 
---------------------- Get the percentage of status and count field 
+--------------------- Get the percentage of status and count field ( Values should be upto 2 decimal point )
 
 o/p ---
 method status count status_pct count_pct 
