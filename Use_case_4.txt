@@ -1,0 +1,7 @@
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes 
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost
+
+
+------ Find out the overall service_cost and transport_cost of the products
