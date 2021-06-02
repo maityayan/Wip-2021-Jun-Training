@@ -1,0 +1,59 @@
+
+-------------  EVAL ------------------
+
+ | eval <destination_field_name>=logic/boolean expression
+ 
+ ------------------- Round Off --------------------
+ 
+ | eval <destination_field_name>=round(<field_name>,<n>)    ----- <n> --- 0,1,2,3,4 .......
+ 
+ index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status 
+|  eval  Div=(status/count) , RR=round(Div,3)
+
+ 
+------------------ Concatenation ------------------
+
+ | eval <destination_field_name>=<field_name1>.<field_name2>."$" 
+ 
+ index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status 
+|  rename status as "Http Status" |  eval  Div=round(('Http Status'/count),3)." $"
+
+------------------------------------------------ Upper / Lower --------------------
+
+| eval <destination_field_name>=upper(<field_name>)
+
+| eval <destination_field_name>=lower(<field_name>)
+
+
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status 
+|  eval low=lower(method) , up=upper(low)
+
+------------------------------------------ Len ------------------
+
+| eval <destination_field_name>=len(<field_name>)
+
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status 
+|  eval Length=len(method)
+
+
+------------------------------------------------ Conditional Function --------------------------------
+IF-----
+
+| eval <destination_field_name>=if(condition,value,else)
+
+
+ | eval Designation=if(emp_name="messages","Manager","Admin")
+ 
+ 
+ index=_internal sourcetype=splunkd_ui_access 
+| top file 
+|  rename file as emp_name 
+|  fields - count,percent | eval Designation=if(emp_name="messages" OR emp_name="login","Manager","Admin")
+
+---------------------------------- Nested IF ------------------------
+
+| eval <destination_field_name>=if(condition1,value1,if(condition2,value2,else))
