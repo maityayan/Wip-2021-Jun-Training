@@ -1,0 +1,11 @@
+index=_internal sourcetype=splunkd_ui_access 
+| top file 
+|  rename file as emp_name 
+|  fields - count,percent
+
+---------------------------- 
+
+Condition -----
+emp_name="messages" ------- Manager 
+emp_name="login" ---------- Admin
+Rest of others ----------- TL 
