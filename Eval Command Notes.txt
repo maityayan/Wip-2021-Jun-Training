@@ -57,3 +57,24 @@ IF-----
 ---------------------------------- Nested IF ------------------------
 
 | eval <destination_field_name>=if(condition1,value1,if(condition2,value2,else))
+
+------------------------------------------------------------------------------------
+
+CASE ----
+| eval <destination_field_name>=case(case1,value1,case2,value2,case3,value3............. default_case,default_value)
+
+| eval Designation=case(emp_name="messages","Manager")
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| top file 
+|  rename file as emp_name 
+|  fields - count,percent | eval Designation=case(emp_name="messages","Manager",1=1,"Admin")
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| top file 
+|  rename file as emp_name 
+|  fields - count,percent | eval Designation=case(emp_name="messages","Manager",emp_name="login","Admin",1=1,"TL")
+
+ 
