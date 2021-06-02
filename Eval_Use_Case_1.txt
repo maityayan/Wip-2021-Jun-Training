@@ -6,3 +6,11 @@ index=_internal sourcetype=splunkd_ui_access
 o/p ---
 method status count status_pct count_pct 
 A        2     3       40 %      60 %
+
+
+Ans : ---
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method,status 
+| eval status_pct=round((status/(status+count))*100,2)." %", count_pct=round((count/(status+count))*100,2)." %"
+
+
