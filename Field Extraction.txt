@@ -1,0 +1,8 @@
+>>>> Field Extraction <<<<<<<<
+1) Index Time Field Extraction ( HF ) 
+2) Search Time Field Extraction (IDX,SH )
+  a) Interactive Field Extractor ( IFX ) -- https://splunkonbigdata.com/2018/10/02/interactive-field-extractor-in-splunk/ 
+  b) REGEX ( | rex ) -- https://splunkonbigdata.com/2018/09/08/usage-of-splunk-commands-rex/
+  
+  
+  
