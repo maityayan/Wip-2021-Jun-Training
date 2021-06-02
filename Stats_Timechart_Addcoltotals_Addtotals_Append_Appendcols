@@ -1,0 +1,183 @@
+
+
+ | top <field_name> limit=<n>
+ 
+ index=_internal sourcetype=splunkd_ui_access 
+|  top limit=0 file
+
+
+  | rare <field_name> limit=<n>
+  
+| stats <stats_function> by <field_name> 
+
+
+stats_function ----
+count 
+sum
+avg
+min
+max 
+dc 
+values
+list
+
+
+
+ Sum --
+ 
+ Name   Notes Count 
+ Priya   10    3
+ Priya    100  5 
+ Kishan   5    8
+ 
+ ( 10 *3 ) + (100*5) = 30 + 500 = 530 
+ 
+ 
+  Avg ---
+ Name   Notes Count 
+ Priya   10    3
+ Priya    100  5 
+ Kishan   5    90
+ 
+ (( 10 *3 ) + (100*5))/8 = (30 + 500)/8 = 530/8 =
+ 
+ 
+ min 
+ 
+ | stats min(Notes) as mini by Name 
+ 
+ Name  mini 
+ Priya 10
+ Kishan 5 
+ 
+ Max 
+ 
+  | stats min(Notes) as mini by Name 
+ 
+ Name  mini 
+ Priya 100
+ Kishan 5 
+ 
+ dc ----
+ 
+ 
+ Name   Notes Count 
+ Priya   10    3
+ Priya   100  5 
+ Kishan   5    8
+ 
+ 
+ -------
+ 
+ | stats dc(Notes) as dc by Name 
+ 
+ 
+ Name  dc 
+ Priya  2
+ Kishan 1
+ 
+ 
+ 
+ 
+ index=_internal sourcetype=splunkd_ui_access 
+|  stats count,avg(status) as average,sum(status) as summ, min(status) as minimum,max(status) as maximum,dc(status) as distinct,values(status) as val by method
+
+
+| addcoltotals 
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes,date_minute
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addcoltotals Service_Cost,Transport_Cost
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addcoltotals labelfield=Product
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addcoltotals labelfield=Cost
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addcoltotals labelfield=Product label="Overall Cost"
+
+
+---- | addtotals 
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addtotals 
+
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes,date_minute 
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addtotals Service_Cost,Transport_Cost
+
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addtotals fieldname="Cost/Product"
+
+-------- Do the summation in row wise as well as column wise ---------------
+
+index=_internal sourcetype=splunkd_ui_access 
+| table method,status,bytes
+|  dedup method 
+|  rename method as Product, status as Service_Cost,bytes as Transport_Cost 
+|  addtotals fieldname="Cost/Product" col=t  labelfield=Product label="Overall Cost"
+
+-------------------------------------- Appendcols ------------------------------------------
+
+Query 1 | appendcols [ | search Query 2 ]
+
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method 
+|  appendcols  
+    [ |  search  index=_audit 
+|  stats count as info_count by info ]
+
+
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method 
+|  appendcols  override=t
+    [ |  search  index=_audit 
+|  stats count by info ]
+
+-------------------------------------- Append ------------------------------
+
+
+Query 1 | append [ | search Query 2 ]
+
+index=_internal sourcetype=splunkd_ui_access 
+|  stats count by method 
+|  append  
+    [ |  search  index=_audit 
+|  stats count  by info ]
+
+
+
+
+
+
+
+
+
+
+ 
