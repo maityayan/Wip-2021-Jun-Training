@@ -1,0 +1,46 @@
+------------------------------- Field Aliases -----------------------------
+
+cisco ---
+
+src_ip=192.34.56.78 user=akshay d_port=22  proto=tcp
+
+
+juniper ----
+SourceIp=192.34.26.78 UserName=akshay DestPort=22 proto=udp
+
+palo-alto ----
+
+Source=198.34.56.78 USER=akshay port=22 proto=tcp
+
+
+-----------------
+
+
+
+-------------------
+src_ip --- src 
+SourceIp --- src 
+Source --- src 
+
+
+index=cisco OR index=juniper OR index=palo-alto | stats count by src 
+
+------------------------------------------------- Calculated Fields --------------------------------
+
+
+
+cisco ---
+
+src_ip=192.34.56.78 user=akshay d_port=22  proto=tcp
+
+
+juniper ----
+SourceIp=192.34.26.78 UserName=akshay DestPort=22 proto=udp
+
+palo-alto ----
+
+Source=198.34.56.78 USER=akshay port=22 proto=tcp
+
+
+| eval dicrection=if(proto="tcp","inbound","outbound") 
+
