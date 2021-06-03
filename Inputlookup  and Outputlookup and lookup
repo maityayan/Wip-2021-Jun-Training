@@ -1,1 +1,29 @@
 https://splunkonbigdata.com/2020/07/22/lookup-table-files-in-splunk/
+
+
+------------------ Lookup ------
+| inputlookup http_desc.csv
+
+--------------------- 
+
+...... | lookup <lookup_file_name> <field_name> 
+
+...... | lookup <lookup_file_name> <lookup_table_file_field_name>  as <event_field_name> 
+
+
+emp_name 
+
+ayan
+kishor
+mohan 
+Kishan 
+
+
+-------------------------------------
+
+name    designation   location
+ayan     TL           kol
+kishor   Manager      che
+mohan    Admin        mum
+raj      CEO          del
+john     Manager      del 
