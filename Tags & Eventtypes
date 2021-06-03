@@ -1,0 +1,53 @@
+
+----------------------------------- Tag --------------------------------
+
+index=apache 
+
+this is a success request with 200 status code 
+
+this is a failure request with 404 status code 
+
+status_code 
+200
+404
+
+
+index=web 
+
+this is a success request with 200 status code 
+
+this is a failure request with 404 status code 
+
+status_code
+200
+404 
+
+
+status_code=404 
+
+
+Auser=sc_admin
+Auser=admin
+Auser=dc_admin 
+
+Auser=sc_admin OR Auser=admin OR Auser=dc_admin 
+
+
+tag=admin_activity 
+
+
+---------------------------------------------------- Eventtype -------------------------------------------------------------
+
+index=cisco 
+
+
+index=juniper
+
+
+index=cisco OR index=juniper
+
+index=palo-alto 
+
+index=fortinet 
+
+eventtype=firewall_logs 
