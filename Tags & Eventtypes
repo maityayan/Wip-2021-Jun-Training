@@ -1,5 +1,6 @@
 
 ----------------------------------- Tag --------------------------------
+Blog - https://docs.splunk.com/Documentation/Splunk/8.2.0/Knowledge/Abouttagsandaliases
 
 index=apache 
 
@@ -37,6 +38,7 @@ tag=admin_activity
 
 
 ---------------------------------------------------- Eventtype -------------------------------------------------------------
+Blog - https://docs.splunk.com/Documentation/Splunk/8.2.0/Knowledge/Abouteventtypes
 
 index=cisco 
 
