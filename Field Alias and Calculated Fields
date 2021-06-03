@@ -1,5 +1,7 @@
 ------------------------------- Field Aliases -----------------------------
 
+Blog - https://splunkonbigdata.com/2018/11/12/how-to-create-field-aliases-in-splunk/
+
 cisco ---
 
 src_ip=192.34.56.78 user=akshay d_port=22  proto=tcp
@@ -26,6 +28,7 @@ Source --- src
 index=cisco OR index=juniper OR index=palo-alto | stats count by src 
 
 ------------------------------------------------- Calculated Fields --------------------------------
+Blog - https://splunkonbigdata.com/2018/11/12/how-to-create-calculated-fields-in-splunk/
 
 
 
