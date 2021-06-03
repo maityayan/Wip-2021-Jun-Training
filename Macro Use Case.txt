@@ -1,0 +1,6 @@
+(index=_internal sourcetype=splunkd_ui_access) 
+| stats count by method,status
+
+-------------------
+
+Create a macro so that user can pass the method value as well as status with macro.
