@@ -2,3 +2,12 @@
 
 ---------------
 Find out the source machines for which allowed source ports are more than 5 
+
+------------------
+
+Ans : -- 
+| tstats count from datamodel=Network_Traffic by All_Traffic.src,All_Traffic.action,All_Traffic.dest,All_Traffic.src_port 
+| rename All_Traffic.* as * 
+| search action="allowed"
+| stats dc(src_port) as count,values(src_port) as src_port by src 
+| search count > 5
