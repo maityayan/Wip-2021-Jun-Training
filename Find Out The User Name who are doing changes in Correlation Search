@@ -1,0 +1,4 @@
+index=_internal sourcetype=splunkd_ui_access method=post */saved/searches* 
+| table user,uri_path,_time 
+| rex field=uri_path "saved\/searches\/(?<saved_search>.*)" 
+| eval saved_search=replace(saved_search,"%20"," ") | search saved_search="*Rule"
